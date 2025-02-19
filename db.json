@@ -1,0 +1,5 @@
+{
+  "welcomeMessage": "Hello! I am your StarApp Bot 🤖. How can I assist you?",
+  "progressMessage": "You have earned 10 badges and 200 coins! 🎉",
+  "error": "Sorry, I couldn't understand your request. Please try again."
+}
