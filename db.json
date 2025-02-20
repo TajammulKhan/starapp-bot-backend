@@ -1,5 +1,67 @@
 {
   "welcomeMessage": "Hello! I am your StarApp Bot 🤖. How can I assist you?",
   "progressMessage": "You have earned 10 badges and 200 coins! 🎉",
-  "error": "Sorry, I couldn't understand your request. Please try again."
+  "error": "Sorry, I couldn't understand your request. Please try again.",
+  "outcomes": [
+    {
+      "category": "Learning",
+      "icon": "📜",
+      "tasks": [
+        {
+          "title": "Algebra basics",
+          "status": "Completed",
+          "completeBy": "12 Feb 25",
+          "reward": 10
+        },
+        {
+          "title": "Inequalities",
+          "status": "Pending",
+          "reward": 10
+        },
+        {
+          "title": "Solving equations",
+          "status": "Pending",
+          "reward": 10
+        }
+      ]
+    },
+    {
+      "category": "Earning",
+      "icon": "🌞",
+      "tasks": [
+        {
+          "title": "Create user specs for Dashboard screen for Mobile SoundBox",
+          "status": "Completed",
+          "completeBy": "EOD",
+          "reward": 10
+        },
+        {
+          "title": "Design chat view for Star App",
+          "status": "Pending",
+          "reward": 10
+        },
+        {
+          "title": "<new outcome typed here>",
+          "status": "Pending",
+          "reward": 10
+        },
+        {
+          "title": "<new outcome typed here>",
+          "status": "Pending",
+          "reward": 10
+        }
+      ]
+    },
+    {
+      "category": "Contribution",
+      "icon": "🎖",
+      "tasks": [
+        {
+          "title": "Create quizzes for Basics of Design lesson assessment",
+          "status": "Pending",
+          "reward": 10
+        }
+      ]
+    }
+  ]
 }
