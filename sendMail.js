@@ -10,7 +10,7 @@ function sendEmail(toEmail, subject, text) {
             service: "gmail",
             auth: {
                 type: "OAuth2",
-                user: "your-email@gmail.com",
+                user: "tajammul.khan@tibilsolutions.com",
                 clientId: auth._clientId,
                 clientSecret: auth._clientSecret,
                 refreshToken: auth.credentials.refresh_token,
@@ -19,7 +19,7 @@ function sendEmail(toEmail, subject, text) {
         });
 
         const mailOptions = {
-            from: '"Star Bot" <your-email@gmail.com>',
+            from: '"Star Bot" <tajammul.khan@tibilsolutions.com>',
             to: toEmail,
             subject: subject,
             html: `<p>${text}</p>`,

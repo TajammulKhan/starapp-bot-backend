@@ -2,13 +2,16 @@ const { google } = require("googleapis");
 const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
+require("dotenv").config();
 
 const SCOPES = ["https://www.googleapis.com/auth/gmail.send"];
 const TOKEN_PATH = path.join(__dirname, "token.json");
 
-const credentials = JSON.parse(fs.readFileSync("credentials.json"));
 
-const { client_secret, client_id, redirect_uris } = credentials.web;
+const client_id = process.env.GOOGLE_OAUTH_CLIENT_ID;
+const client_secret = process.env.GOOGLE_OAUTH_CLIENT_SECRET;
+const redirect_uris = [process.env.GOOGLE_OAUTH_REDIRECT_URI];
+
 const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
 function getNewToken(callback) {
