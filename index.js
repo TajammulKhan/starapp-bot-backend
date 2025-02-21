@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 8080;
-const responsesFile = "./db.json";
+const responsesFile = "/data/db.json";
 
 const loadResponses = () => {
     try {
@@ -22,6 +22,17 @@ const loadResponses = () => {
         return { error: "Database file not found or corrupted" };
     }
 };
+
+
+// Check if db.json exists, otherwise create it
+if (!fs.existsSync(responsesFile)) {
+    console.log("⚠️ db.json not found! Creating default file...");
+    fs.writeFileSync(responsesFile, JSON.stringify({
+        welcomeMessage: "Hello! I am your StarApp Bot 🤖. How can I assist you?",
+        outcomes: []
+    }, null, 2));
+}
+
 
 app.get("/", (req, res) => {
     try {
@@ -35,6 +46,7 @@ app.get("/", (req, res) => {
 
 
 app.post("/send-email", (req, res) => {
+    console.log("📩 Email sending is disabled for debugging.");
     const { email, subject, message } = req.body;
     if (!email || !subject || !message) {
         return res.status(400).json({ error: "Email, subject, and message are required." });
