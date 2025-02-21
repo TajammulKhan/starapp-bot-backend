@@ -10,8 +10,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const PORT = process.env.PORT || 8080;
-const responsesFile = "/data/db.json";
+const defaultPath = "/data/db.json";
+const backupPath = "./db.json"; // Use a local backup
+
+const responsesFile = fs.existsSync(defaultPath) ? defaultPath : backupPath;
+console.log(`📂 Using responses file at: ${responsesFile}`);
 
 const loadResponses = () => {
     try {
@@ -32,6 +35,10 @@ if (!fs.existsSync(responsesFile)) {
         outcomes: []
     }, null, 2));
 }
+
+setInterval(() => {
+    console.log("🔄 Bot is running...");
+}, 30000); // Keep alive every 30 seconds
 
 
 app.get("/", (req, res) => {
@@ -90,7 +97,16 @@ app.post("/remove-outcome", (req, res) => {
     res.json({ message: "Outcome removed successfully." });
 });
 
+process.on("uncaughtException", (err) => {
+    console.error("🚨 Uncaught Exception:", err);
+});
 
-app.listen(PORT, () => {
+process.on("unhandledRejection", (reason, promise) => {
+    console.error("🚨 Unhandled Rejection at:", promise, "reason:", reason);
+});
+
+
+
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`✅ StarApp Bot is running on port ${PORT}`);
 });
