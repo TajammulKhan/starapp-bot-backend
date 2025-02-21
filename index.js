@@ -10,15 +10,29 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const responsesFile = "./db.json";
 
-const loadResponses = () => JSON.parse(fs.readFileSync(responsesFile, "utf8"));
+const loadResponses = () => {
+    try {
+        console.log("📂 Attempting to read db.json...");
+        return JSON.parse(fs.readFileSync(responsesFile, "utf8"));
+    } catch (error) {
+        console.error("❌ Error reading db.json:", error);
+        return { error: "Database file not found or corrupted" };
+    }
+};
 
 app.get("/", (req, res) => {
-    const responses = loadResponses();
-    res.json({ message: responses.welcomeMessage });
+    try {
+        const responses = loadResponses();
+        res.json({ message: responses.welcomeMessage });
+    } catch (error) {
+        console.error("❌ Error loading responses:", error);
+        res.status(500).json({ error: "Failed to load responses" });
+    }
 });
+
 
 app.post("/send-email", (req, res) => {
     const { email, subject, message } = req.body;
